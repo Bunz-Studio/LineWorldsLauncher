@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace LineWorldsLauncher
 {
@@ -15,6 +16,11 @@ namespace LineWorldsLauncher
 		public List<ProjectInstance> instances = new List<ProjectInstance>();
 		public List<EditorInstance> editorInstances = new List<EditorInstance>();
 		
+		public Preferences preferences = new Preferences();
+		public void SavePreferences()
+		{
+			File.WriteAllText("preferences.json", JsonConvert.SerializeObject(preferences));
+		}
 		public MainForm()
 		{
 			InitializeComponent();
@@ -29,6 +35,15 @@ namespace LineWorldsLauncher
 			projPanelIndex = 0;
 			MoveTab(0);
 			MoveProjectTab(projPanelIndex);
+			
+			if(File.Exists("preferences.json"))
+			{
+				preferences = JsonConvert.DeserializeObject<Preferences>(File.ReadAllText("preferences.json"));
+				foreach(var editor in preferences.editors)
+				{
+					ImportEditor(editor.path);
+				}
+			}
 		}
 		
 		public void MoveTab(int index)
@@ -81,12 +96,25 @@ namespace LineWorldsLauncher
 		
 		void Proj_openButtonClick(object sender, EventArgs e)
 		{
-			var dialog = new OpenFileDialog();
-			dialog.RestoreDirectory = true;
-			dialog.Filter = "Executable file (.exe)|*.exe|All files (*.*)|*.*";
-			if(dialog.ShowDialog() == DialogResult.OK)
+			if(projPanelIndex == 0)
 			{
-				ImportEditor(dialog.FileName);
+				var dialog = new OpenFileDialog();
+				dialog.RestoreDirectory = true;
+				dialog.Filter = "Executable file (.exe)|*.exe|All files (*.*)|*.*";
+				if(dialog.ShowDialog() == DialogResult.OK)
+				{
+					ImportEditor(dialog.FileName);
+				}
+			}
+			else
+			{
+				var dialog = new OpenFileDialog();
+				dialog.RestoreDirectory = true;
+				dialog.Filter = "Executable file (.exe)|*.exe|All files (*.*)|*.*";
+				if(dialog.ShowDialog() == DialogResult.OK)
+				{
+					ImportEditor(dialog.FileName);
+				}
 			}
 		}
 		
@@ -99,8 +127,39 @@ namespace LineWorldsLauncher
 				var i = new EditorInstance();
 				i.path = path;
 				i.listItem = inst;
+				preferences.editors.Add(
+					new Preferences.Editor()
+					{
+						name = inst.editorTitleLabel.Text,
+						path = path
+					}
+				);
+				SavePreferences();
 				editorInstances.Add(i);
 				RefreshEditorList();
+			}
+		}
+		
+		
+		public void ImportProject(string path)
+		{
+			if(!instances.Exists(val => val.directory == path))
+			{
+				var inst = new ProjectListItem(path);
+				proj_projectListPanel.Controls.Add(inst);
+				var i = new ProjectInstance();
+				i.directory = path;
+				i.listItem = inst;
+				preferences.projects.Add(
+					new Preferences.Project()
+					{
+						name = inst.projectTitleLabel.Text,
+						path = path
+					}
+				);
+				SavePreferences();
+				instances.Add(i);
+				RefreshProjectList();
 			}
 		}
 		
@@ -109,6 +168,14 @@ namespace LineWorldsLauncher
 			foreach(Control c in proj_editorListPanel.Controls)
 			{
 				c.Width = proj_editorListPanel.Width - 10;
+			}
+		}
+		
+		public void RefreshProjectList()
+		{
+			foreach(Control c in proj_projectListPanel.Controls)
+			{
+				c.Width = proj_projectListPanel.Width - 10;
 			}
 		}
 		
@@ -129,18 +196,28 @@ namespace LineWorldsLauncher
 		public string path;
 		public EditorListItem listItem;
 	}
+	
+	public class Preferences
+	{
+		public List<Project> projects = new List<Project>();
+		public List<Editor> editors = new List<Editor>();
+		public class Project
+		{
+			public string name;
+			public string path;
+			public LiwProjectInfo info;
+		}
+		public class Editor
+		{
+			public string name;
+			public string path;
+		}
+	}
 }
 
 [Serializable]
 public class LiwProjectInfo
 {
-	// Token: 0x060003BE RID: 958 RVA: 0x00013204 File Offset: 0x00011404
-	public LiwProjectInfo()
-	{
-		var random = new Random();
-		this.levelID = random.Next(1, 9999999);
-		this.authorID = random.Next(1, 9999999);
-	}
 	public string levelName = "Untitled";
 	public string description;
 	public string authorName;

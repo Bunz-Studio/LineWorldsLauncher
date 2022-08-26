@@ -14,8 +14,8 @@ namespace LineWorldsLauncher
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
-		private System.Windows.Forms.Label editorTitleLabel;
-		private System.Windows.Forms.Label editorPathLabel;
+		public System.Windows.Forms.Label editorTitleLabel;
+		public System.Windows.Forms.Label editorPathLabel;
 		
 		/// <summary>
 		/// Disposes resources used by the control.
