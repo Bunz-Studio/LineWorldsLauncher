@@ -67,6 +67,10 @@ namespace LineWorldsLauncher
 						startInfo.Arguments = "\"" + projectPath + "\"";
 						Process.Start(startInfo);
 					}
+					else
+					{
+						MessageBox.Show("You don't have an editor version " + projectVersion + " to open this", "Project Opener");
+					}
 				}
 				else
 				{
@@ -81,6 +85,10 @@ namespace LineWorldsLauncher
 							startInfo.Arguments = "\"" + projectPath + "\"";
 							Process.Start(startInfo);
 						}
+					}
+					else
+					{
+						MessageBox.Show("You don't have any editor to open this project", "Project Opener");
 					}
 				}
 			}

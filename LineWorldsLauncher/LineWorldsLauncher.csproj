@@ -16,7 +16,7 @@
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <WarningLevel>4</WarningLevel>
-    <ApplicationIcon>lib\LineWorldsLogo.ico</ApplicationIcon>
+    <ApplicationIcon>lib\LineWorldsLight.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -44,6 +44,9 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetZip">
+      <HintPath>lib\DotNetZip.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -71,6 +74,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlowLayoutItem.cs" />
+    <Compile Include="FlowLayoutItem.Designer.cs">
+      <DependentUpon>FlowLayoutItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstallForm.cs" />
+    <Compile Include="InstallForm.Designer.cs">
+      <DependentUpon>InstallForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstallProgress.cs" />
+    <Compile Include="InstallProgress.Designer.cs">
+      <DependentUpon>InstallProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs" />
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -92,6 +107,15 @@
   <ItemGroup>
     <EmbeddedResource Include="EditorListItem.resx">
       <DependentUpon>EditorListItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlowLayoutItem.resx">
+      <DependentUpon>FlowLayoutItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstallForm.resx">
+      <DependentUpon>InstallForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstallProgress.resx">
+      <DependentUpon>InstallProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -24,13 +25,16 @@ namespace LineWorldsLauncher
 		public MainForm()
 		{
 			InitializeComponent();
+			ServicePointManager.Expect100Continue = true;
+			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 			panels = new []{
 				welcomePanel,
 				projectsPanel
 			};
-			projPanels = new []{
+			projPanels = new Panel[]{
 				proj_projectListPanel,
-				proj_editorListPanel
+				proj_editorListPanel,
+				TutorialPanel
 			};
 			projPanelIndex = 0;
 			MoveProjectTab(projPanelIndex);
@@ -40,7 +44,17 @@ namespace LineWorldsLauncher
 				preferences = JsonConvert.DeserializeObject<Preferences>(File.ReadAllText("preferences.json"));
 				foreach(var editor in preferences.editors)
 				{
-					ImportEditor(editor.path);
+					if(File.Exists(editor.path))
+					{
+						ImportEditor(editor.path.Replace('/', '\\'));
+					}
+				}
+				foreach(var project in preferences.projects)
+				{
+					if(Directory.Exists(project.path))
+					{
+						ImportProject(project.path.Replace('/', '\\'));
+					}
 				}
 				MoveTab(1);
 			}
@@ -83,6 +97,13 @@ namespace LineWorldsLauncher
 			
 		}
 		
+		void Proj_tutorialsButtonClick(object sender, EventArgs e)
+		{
+			MoveProjectTab(2);
+			proj_NewButton.Visible = false;
+			proj_openButton.Visible = false;
+		}
+		
 		void MainFormActivated(object sender, EventArgs e)
 		{
 			RefreshList();
@@ -92,12 +113,16 @@ namespace LineWorldsLauncher
 		{
 			MoveProjectTab(1);
 			proj_NewButton.Text = "Install";
+			proj_NewButton.Visible = true;
+			proj_openButton.Visible = true;
 		}
 		
 		void Proj_projectsButtonClick(object sender, EventArgs e)
 		{
 			MoveProjectTab(0);
 			proj_NewButton.Text = "New";
+			proj_NewButton.Visible = true;
+			proj_openButton.Visible = true;
 		}
 		
 		void Proj_openButtonClick(object sender, EventArgs e)
@@ -109,7 +134,7 @@ namespace LineWorldsLauncher
 				dialog.Filter = "Line Worlds Project (.liw)|*.liw|All files (*.*)|*.*";
 				if(dialog.ShowDialog() == DialogResult.OK)
 				{
-					ImportProject(GoUpFolder(dialog.FileName));
+					ImportProject(GoUpFolder(dialog.FileName).Replace('/', '\\'));
 					//ImportEditor(dialog.FileName);
 				}
 			}
@@ -120,14 +145,14 @@ namespace LineWorldsLauncher
 				dialog.Filter = "Executable file (.exe)|*.exe|All files (*.*)|*.*";
 				if(dialog.ShowDialog() == DialogResult.OK)
 				{
-					ImportEditor(dialog.FileName);
+					ImportEditor(dialog.FileName.Replace('/', '\\'));
 				}
 			}
 		}
 		
 		public void ImportEditor(string path)
 		{
-			if(!editorInstances.Exists(val => val.path == path))
+			if(!editorInstances.Exists(val => val.path.Replace('/', '\\') == path))
 			{
 				string editorDirectory = GoUpFolder(path);
 				var projectsDirectory = Path.Combine(editorDirectory, "Projects");
@@ -178,7 +203,7 @@ namespace LineWorldsLauncher
 		
 		public void ImportProject(string path)
 		{
-			if(!instances.Exists(val => val.directory == path))
+			if(!instances.Exists(val => val.directory.Replace('/', '\\') == path))
 			{
 				var inst = new ProjectListItem(path);
 				proj_projectListPanel.Controls.Add(inst);
@@ -233,6 +258,18 @@ namespace LineWorldsLauncher
 	        }
 			return y;
 	    }
+		void Proj_NewButtonClick(object sender, EventArgs e)
+		{
+			if(projPanelIndex == 0)
+			{
+				MessageBox.Show("You can only create new project from the editor for now", "Coming Soon");
+			}
+			else
+			{
+				var installDialog = new InstallForm(this);
+				installDialog.Show();
+			}
+		}
 	}
 	
 	public class ProjectInstance
@@ -265,6 +302,30 @@ namespace LineWorldsLauncher
 	}
 }
 
+public class ServerVersions
+{
+	public EditorVersion[] versions;
+}
+
+public class EditorVersion
+{
+	public string version;
+	public string list;
+}
+
+public class DownloadFiles
+{
+	public string version;
+	public ServerFile[] files;
+}
+
+public class ServerFile
+{
+	public string name;
+	public string directory;
+	public string link;
+	public int size;
+}
 [Serializable]
 public class LiwProjectInfo
 {

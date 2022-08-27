@@ -28,6 +28,8 @@ namespace LineWorldsLauncher
 		private System.Windows.Forms.Button proj_editorsButton;
 		private System.Windows.Forms.Button proj_tutorialsButton;
 		private System.Windows.Forms.FlowLayoutPanel proj_editorListPanel;
+		private System.Windows.Forms.Panel TutorialPanel;
+		private System.Windows.Forms.Label label1;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -56,6 +58,8 @@ namespace LineWorldsLauncher
 			this.welc_descriptionLabel = new System.Windows.Forms.Label();
 			this.welcomePanel = new System.Windows.Forms.Panel();
 			this.projectsPanel = new System.Windows.Forms.Panel();
+			this.TutorialPanel = new System.Windows.Forms.Panel();
+			this.label1 = new System.Windows.Forms.Label();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.proj_projectsButton = new System.Windows.Forms.Button();
 			this.proj_editorsButton = new System.Windows.Forms.Button();
@@ -67,6 +71,7 @@ namespace LineWorldsLauncher
 			this.proj_editorListPanel = new System.Windows.Forms.FlowLayoutPanel();
 			this.welcomePanel.SuspendLayout();
 			this.projectsPanel.SuspendLayout();
+			this.TutorialPanel.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -121,6 +126,7 @@ namespace LineWorldsLauncher
 			this.projectsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 			| System.Windows.Forms.AnchorStyles.Left) 
 			| System.Windows.Forms.AnchorStyles.Right)));
+			this.projectsPanel.Controls.Add(this.TutorialPanel);
 			this.projectsPanel.Controls.Add(this.flowLayoutPanel1);
 			this.projectsPanel.Controls.Add(this.proj_NewButton);
 			this.projectsPanel.Controls.Add(this.proj_openButton);
@@ -131,6 +137,27 @@ namespace LineWorldsLauncher
 			this.projectsPanel.Name = "projectsPanel";
 			this.projectsPanel.Size = new System.Drawing.Size(748, 438);
 			this.projectsPanel.TabIndex = 4;
+			// 
+			// TutorialPanel
+			// 
+			this.TutorialPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
+			this.TutorialPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.TutorialPanel.Controls.Add(this.label1);
+			this.TutorialPanel.Location = new System.Drawing.Point(131, 49);
+			this.TutorialPanel.Name = "TutorialPanel";
+			this.TutorialPanel.Size = new System.Drawing.Size(604, 364);
+			this.TutorialPanel.TabIndex = 6;
+			// 
+			// label1
+			// 
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+			this.label1.Location = new System.Drawing.Point(14, 14);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(415, 145);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "Sorry, we don\'t have any tutorials yet";
 			// 
 			// flowLayoutPanel1
 			// 
@@ -177,6 +204,7 @@ namespace LineWorldsLauncher
 			this.proj_tutorialsButton.TabIndex = 2;
 			this.proj_tutorialsButton.Text = "Tutorials";
 			this.proj_tutorialsButton.UseVisualStyleBackColor = true;
+			this.proj_tutorialsButton.Click += new System.EventHandler(this.Proj_tutorialsButtonClick);
 			// 
 			// proj_NewButton
 			// 
@@ -188,6 +216,7 @@ namespace LineWorldsLauncher
 			this.proj_NewButton.TabIndex = 2;
 			this.proj_NewButton.Text = "New";
 			this.proj_NewButton.UseVisualStyleBackColor = true;
+			this.proj_NewButton.Click += new System.EventHandler(this.Proj_NewButtonClick);
 			// 
 			// proj_openButton
 			// 
@@ -252,6 +281,7 @@ namespace LineWorldsLauncher
 			this.Activated += new System.EventHandler(this.MainFormActivated);
 			this.welcomePanel.ResumeLayout(false);
 			this.projectsPanel.ResumeLayout(false);
+			this.TutorialPanel.ResumeLayout(false);
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
