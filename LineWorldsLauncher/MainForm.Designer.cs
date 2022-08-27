@@ -63,8 +63,8 @@ namespace LineWorldsLauncher
 			this.proj_NewButton = new System.Windows.Forms.Button();
 			this.proj_openButton = new System.Windows.Forms.Button();
 			this.proj_titleLabel = new System.Windows.Forms.Label();
-			this.proj_editorListPanel = new System.Windows.Forms.FlowLayoutPanel();
 			this.proj_projectListPanel = new System.Windows.Forms.FlowLayoutPanel();
+			this.proj_editorListPanel = new System.Windows.Forms.FlowLayoutPanel();
 			this.welcomePanel.SuspendLayout();
 			this.projectsPanel.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
@@ -210,6 +210,18 @@ namespace LineWorldsLauncher
 			this.proj_titleLabel.TabIndex = 1;
 			this.proj_titleLabel.Text = "Line Worlds Projects";
 			// 
+			// proj_projectListPanel
+			// 
+			this.proj_projectListPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
+			this.proj_projectListPanel.AutoScroll = true;
+			this.proj_projectListPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.proj_projectListPanel.Location = new System.Drawing.Point(131, 49);
+			this.proj_projectListPanel.Name = "proj_projectListPanel";
+			this.proj_projectListPanel.Size = new System.Drawing.Size(604, 364);
+			this.proj_projectListPanel.TabIndex = 3;
+			// 
 			// proj_editorListPanel
 			// 
 			this.proj_editorListPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -223,18 +235,6 @@ namespace LineWorldsLauncher
 			this.proj_editorListPanel.TabIndex = 5;
 			this.proj_editorListPanel.Resize += new System.EventHandler(this.Proj_editorListPanelResize);
 			// 
-			// proj_projectListPanel
-			// 
-			this.proj_projectListPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-			| System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
-			this.proj_projectListPanel.AutoScroll = true;
-			this.proj_projectListPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.proj_projectListPanel.Location = new System.Drawing.Point(131, 49);
-			this.proj_projectListPanel.Name = "proj_projectListPanel";
-			this.proj_projectListPanel.Size = new System.Drawing.Size(604, 364);
-			this.proj_projectListPanel.TabIndex = 3;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -244,6 +244,7 @@ namespace LineWorldsLauncher
 			this.Controls.Add(this.projectsPanel);
 			this.Controls.Add(this.welcomePanel);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Line Worlds Launcher";

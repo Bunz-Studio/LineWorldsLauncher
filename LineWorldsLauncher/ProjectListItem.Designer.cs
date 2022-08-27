@@ -54,6 +54,7 @@ namespace LineWorldsLauncher
 			this.projectTitleLabel.Size = new System.Drawing.Size(494, 23);
 			this.projectTitleLabel.TabIndex = 0;
 			this.projectTitleLabel.Text = "ProjectName";
+			this.projectTitleLabel.Click += new System.EventHandler(this.ProjectListItemClick);
 			// 
 			// projectPathLabel
 			// 
@@ -64,6 +65,7 @@ namespace LineWorldsLauncher
 			this.projectPathLabel.Size = new System.Drawing.Size(492, 23);
 			this.projectPathLabel.TabIndex = 1;
 			this.projectPathLabel.Text = "C:/ProjectPath/";
+			this.projectPathLabel.Click += new System.EventHandler(this.ProjectListItemClick);
 			// 
 			// projectOwnerLabel
 			// 
@@ -86,6 +88,7 @@ namespace LineWorldsLauncher
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
 			this.Name = "ProjectListItem";
 			this.Size = new System.Drawing.Size(526, 69);
+			this.Click += new System.EventHandler(this.ProjectListItemClick);
 			this.ResumeLayout(false);
 
 		}

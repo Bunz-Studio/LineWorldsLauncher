@@ -16,6 +16,8 @@ namespace LineWorldsLauncher
 		private System.ComponentModel.IContainer components = null;
 		public System.Windows.Forms.Label editorTitleLabel;
 		public System.Windows.Forms.Label editorPathLabel;
+		public System.Windows.Forms.Button removeButton;
+		public System.Windows.Forms.Button openButton;
 		
 		/// <summary>
 		/// Disposes resources used by the control.
@@ -40,6 +42,8 @@ namespace LineWorldsLauncher
 		{
 			this.editorTitleLabel = new System.Windows.Forms.Label();
 			this.editorPathLabel = new System.Windows.Forms.Label();
+			this.removeButton = new System.Windows.Forms.Button();
+			this.openButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// editorTitleLabel
@@ -63,11 +67,36 @@ namespace LineWorldsLauncher
 			this.editorPathLabel.TabIndex = 1;
 			this.editorPathLabel.Text = "C:/ProjectPath/";
 			// 
+			// removeButton
+			// 
+			this.removeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.removeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.removeButton.Location = new System.Drawing.Point(459, 9);
+			this.removeButton.Name = "removeButton";
+			this.removeButton.Size = new System.Drawing.Size(60, 23);
+			this.removeButton.TabIndex = 2;
+			this.removeButton.Text = "Remove";
+			this.removeButton.UseVisualStyleBackColor = true;
+			// 
+			// openButton
+			// 
+			this.openButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.openButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.openButton.Location = new System.Drawing.Point(403, 9);
+			this.openButton.Name = "openButton";
+			this.openButton.Size = new System.Drawing.Size(50, 23);
+			this.openButton.TabIndex = 3;
+			this.openButton.Text = "Open";
+			this.openButton.UseVisualStyleBackColor = true;
+			this.openButton.Click += new System.EventHandler(this.OpenButtonClick);
+			// 
 			// EditorListItem
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+			this.Controls.Add(this.openButton);
+			this.Controls.Add(this.removeButton);
 			this.Controls.Add(this.editorPathLabel);
 			this.Controls.Add(this.editorTitleLabel);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
