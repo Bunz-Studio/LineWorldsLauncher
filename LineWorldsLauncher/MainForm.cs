@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
@@ -13,15 +14,18 @@ namespace LineWorldsLauncher
 		public Panel[] panels;
 		public Panel[] projPanels;
 		public int projPanelIndex;
+		public const float version = 1.2f;
 		
 		public List<ProjectInstance> instances = new List<ProjectInstance>();
 		public List<EditorInstance> editorInstances = new List<EditorInstance>();
 		
 		public Preferences preferences = new Preferences();
+		
 		public void SavePreferences()
 		{
 			File.WriteAllText("preferences.json", JsonConvert.SerializeObject(preferences));
 		}
+		
 		public MainForm()
 		{
 			InitializeComponent();
@@ -34,7 +38,7 @@ namespace LineWorldsLauncher
 			projPanels = new Panel[]{
 				proj_projectListPanel,
 				proj_editorListPanel,
-				TutorialPanel
+				proj_tutorialListPanel
 			};
 			projPanelIndex = 0;
 			MoveProjectTab(projPanelIndex);
@@ -63,6 +67,31 @@ namespace LineWorldsLauncher
 				MoveTab(0);
 			}
 			Load += (sender, e) => RefreshProjectList();
+			
+			var client = new WebClient();
+			client.DownloadStringCompleted += (sender, e) => {
+				if(e.Error != null)
+				{
+					MessageBox.Show("Failed to check launcher update", "Updater");
+				}
+				else
+				{
+					var data = e.Result;
+					var info = JsonConvert.DeserializeObject<UpdateInfo>(data);
+					if(info.version > version)
+					{
+						if(MessageBox.Show("There's a new version of the launcher, do you want to download it?", "Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+						{
+							File.WriteAllText("UpdateInfo.json", data);
+							System.Diagnostics.Process.Start("LauncherUpdater.exe");
+							canExit = true;
+							Dispose();
+							Application.Exit();
+						}
+					}
+				}
+			};
+			client.DownloadStringAsync(new Uri(InstallForm.mainLink + "/download/launcher.json"));
 		}
 		
 		public void MoveTab(int index)
@@ -97,12 +126,32 @@ namespace LineWorldsLauncher
 			
 		}
 		
+		int reloadAttempt;
+		bool startupLoad;
 		void Proj_tutorialsButtonClick(object sender, EventArgs e)
 		{
 			MoveProjectTab(2);
 			proj_NewButton.Visible = false;
 			proj_openButton.Visible = false;
 			proj_titleLabel.Text = "Line Worlds Tutorials";
+			proj_tutorialListPanel.Visible = true;
+			
+			reloadAttempt++;
+			if(reloadAttempt > 2 || !startupLoad)
+				reloadAttempt = 0;
+			else
+				return;
+			
+			startupLoad = true;
+			var client = new WebClient();
+			var data = client.DownloadString(InstallForm.mainLink + "/tutorials.json");
+			var info = JsonConvert.DeserializeObject<ServerTutorials>(data);
+			proj_tutorialListPanel.Controls.Clear();
+			foreach(var tutorial in info.tutorials)
+			{
+				var item = new TutorialListItem(tutorial);
+				proj_tutorialListPanel.Controls.Add(item);
+			}
 		}
 		
 		void MainFormActivated(object sender, EventArgs e)
@@ -291,6 +340,10 @@ namespace LineWorldsLauncher
 				e.Cancel = true;
 				Hide();
 			}
+			else
+			{
+				trayIcon.Dispose();
+			}
 		}
 		void TrayIconMouseClick(object sender, MouseEventArgs e)
 		{
@@ -354,6 +407,18 @@ public class ServerFile
 	public string directory;
 	public string link;
 	public int size;
+}
+	
+public class UpdateInfo
+{
+	public float version;
+	public List<FileUpdate> files = new List<FileUpdate>();
+}
+
+public class FileUpdate
+{
+	public string directory;
+	public string link;
 }
 [Serializable]
 public class LiwProjectInfo

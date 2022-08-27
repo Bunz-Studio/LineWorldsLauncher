@@ -100,6 +100,10 @@
       <DependentUpon>ProjectListItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TutorialListItem.cs" />
+    <Compile Include="TutorialListItem.Designer.cs">
+      <DependentUpon>TutorialListItem.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -122,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectListItem.resx">
       <DependentUpon>ProjectListItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TutorialListItem.resx">
+      <DependentUpon>TutorialListItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

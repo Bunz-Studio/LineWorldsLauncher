@@ -28,12 +28,11 @@ namespace LineWorldsLauncher
 		private System.Windows.Forms.Button proj_editorsButton;
 		private System.Windows.Forms.Button proj_tutorialsButton;
 		private System.Windows.Forms.FlowLayoutPanel proj_editorListPanel;
-		private System.Windows.Forms.Panel TutorialPanel;
-		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.NotifyIcon trayIcon;
 		private System.Windows.Forms.ContextMenuStrip trayContextMenu;
 		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+		private System.Windows.Forms.FlowLayoutPanel proj_tutorialListPanel;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -63,12 +62,11 @@ namespace LineWorldsLauncher
 			this.welc_descriptionLabel = new System.Windows.Forms.Label();
 			this.welcomePanel = new System.Windows.Forms.Panel();
 			this.projectsPanel = new System.Windows.Forms.Panel();
-			this.TutorialPanel = new System.Windows.Forms.Panel();
-			this.label1 = new System.Windows.Forms.Label();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.proj_projectsButton = new System.Windows.Forms.Button();
 			this.proj_editorsButton = new System.Windows.Forms.Button();
 			this.proj_tutorialsButton = new System.Windows.Forms.Button();
+			this.proj_tutorialListPanel = new System.Windows.Forms.FlowLayoutPanel();
 			this.proj_NewButton = new System.Windows.Forms.Button();
 			this.proj_openButton = new System.Windows.Forms.Button();
 			this.proj_titleLabel = new System.Windows.Forms.Label();
@@ -80,7 +78,6 @@ namespace LineWorldsLauncher
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.welcomePanel.SuspendLayout();
 			this.projectsPanel.SuspendLayout();
-			this.TutorialPanel.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.trayContextMenu.SuspendLayout();
 			this.SuspendLayout();
@@ -89,7 +86,7 @@ namespace LineWorldsLauncher
 			// 
 			this.welc_goButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.welc_goButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.welc_goButton.Location = new System.Drawing.Point(670, 400);
+			this.welc_goButton.Location = new System.Drawing.Point(725, 437);
 			this.welc_goButton.Name = "welc_goButton";
 			this.welc_goButton.Size = new System.Drawing.Size(64, 23);
 			this.welc_goButton.TabIndex = 0;
@@ -114,7 +111,7 @@ namespace LineWorldsLauncher
 			this.welc_descriptionLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
 			this.welc_descriptionLabel.Location = new System.Drawing.Point(16, 49);
 			this.welc_descriptionLabel.Name = "welc_descriptionLabel";
-			this.welc_descriptionLabel.Size = new System.Drawing.Size(718, 337);
+			this.welc_descriptionLabel.Size = new System.Drawing.Size(773, 374);
 			this.welc_descriptionLabel.TabIndex = 2;
 			this.welc_descriptionLabel.Text = resources.GetString("welc_descriptionLabel.Text");
 			// 
@@ -128,7 +125,7 @@ namespace LineWorldsLauncher
 			this.welcomePanel.Controls.Add(this.welc_titleLabel);
 			this.welcomePanel.Location = new System.Drawing.Point(0, 0);
 			this.welcomePanel.Name = "welcomePanel";
-			this.welcomePanel.Size = new System.Drawing.Size(748, 438);
+			this.welcomePanel.Size = new System.Drawing.Size(803, 475);
 			this.welcomePanel.TabIndex = 3;
 			// 
 			// projectsPanel
@@ -136,8 +133,8 @@ namespace LineWorldsLauncher
 			this.projectsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 			| System.Windows.Forms.AnchorStyles.Left) 
 			| System.Windows.Forms.AnchorStyles.Right)));
-			this.projectsPanel.Controls.Add(this.TutorialPanel);
 			this.projectsPanel.Controls.Add(this.flowLayoutPanel1);
+			this.projectsPanel.Controls.Add(this.proj_tutorialListPanel);
 			this.projectsPanel.Controls.Add(this.proj_NewButton);
 			this.projectsPanel.Controls.Add(this.proj_openButton);
 			this.projectsPanel.Controls.Add(this.proj_titleLabel);
@@ -145,29 +142,8 @@ namespace LineWorldsLauncher
 			this.projectsPanel.Controls.Add(this.proj_editorListPanel);
 			this.projectsPanel.Location = new System.Drawing.Point(0, 0);
 			this.projectsPanel.Name = "projectsPanel";
-			this.projectsPanel.Size = new System.Drawing.Size(748, 438);
+			this.projectsPanel.Size = new System.Drawing.Size(803, 475);
 			this.projectsPanel.TabIndex = 4;
-			// 
-			// TutorialPanel
-			// 
-			this.TutorialPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-			| System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
-			this.TutorialPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.TutorialPanel.Controls.Add(this.label1);
-			this.TutorialPanel.Location = new System.Drawing.Point(131, 49);
-			this.TutorialPanel.Name = "TutorialPanel";
-			this.TutorialPanel.Size = new System.Drawing.Size(604, 364);
-			this.TutorialPanel.TabIndex = 6;
-			// 
-			// label1
-			// 
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-			this.label1.Location = new System.Drawing.Point(14, 14);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(415, 145);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Sorry, we don\'t have any tutorials yet";
 			// 
 			// flowLayoutPanel1
 			// 
@@ -179,16 +155,17 @@ namespace LineWorldsLauncher
 			this.flowLayoutPanel1.Controls.Add(this.proj_tutorialsButton);
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(16, 49);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(109, 364);
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(145, 409);
 			this.flowLayoutPanel1.TabIndex = 4;
 			this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.FlowLayoutPanel1Paint);
 			// 
 			// proj_projectsButton
 			// 
 			this.proj_projectsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.proj_projectsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
 			this.proj_projectsButton.Location = new System.Drawing.Point(3, 3);
 			this.proj_projectsButton.Name = "proj_projectsButton";
-			this.proj_projectsButton.Size = new System.Drawing.Size(102, 23);
+			this.proj_projectsButton.Size = new System.Drawing.Size(137, 36);
 			this.proj_projectsButton.TabIndex = 0;
 			this.proj_projectsButton.Text = "Projects";
 			this.proj_projectsButton.UseVisualStyleBackColor = true;
@@ -197,9 +174,10 @@ namespace LineWorldsLauncher
 			// proj_editorsButton
 			// 
 			this.proj_editorsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.proj_editorsButton.Location = new System.Drawing.Point(3, 32);
+			this.proj_editorsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+			this.proj_editorsButton.Location = new System.Drawing.Point(3, 45);
 			this.proj_editorsButton.Name = "proj_editorsButton";
-			this.proj_editorsButton.Size = new System.Drawing.Size(102, 23);
+			this.proj_editorsButton.Size = new System.Drawing.Size(137, 36);
 			this.proj_editorsButton.TabIndex = 1;
 			this.proj_editorsButton.Text = "Editors";
 			this.proj_editorsButton.UseVisualStyleBackColor = true;
@@ -208,19 +186,32 @@ namespace LineWorldsLauncher
 			// proj_tutorialsButton
 			// 
 			this.proj_tutorialsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.proj_tutorialsButton.Location = new System.Drawing.Point(3, 61);
+			this.proj_tutorialsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+			this.proj_tutorialsButton.Location = new System.Drawing.Point(3, 87);
 			this.proj_tutorialsButton.Name = "proj_tutorialsButton";
-			this.proj_tutorialsButton.Size = new System.Drawing.Size(102, 23);
+			this.proj_tutorialsButton.Size = new System.Drawing.Size(137, 36);
 			this.proj_tutorialsButton.TabIndex = 2;
 			this.proj_tutorialsButton.Text = "Tutorials";
 			this.proj_tutorialsButton.UseVisualStyleBackColor = true;
 			this.proj_tutorialsButton.Click += new System.EventHandler(this.Proj_tutorialsButtonClick);
 			// 
+			// proj_tutorialListPanel
+			// 
+			this.proj_tutorialListPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
+			this.proj_tutorialListPanel.AutoScroll = true;
+			this.proj_tutorialListPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.proj_tutorialListPanel.Location = new System.Drawing.Point(167, 49);
+			this.proj_tutorialListPanel.Name = "proj_tutorialListPanel";
+			this.proj_tutorialListPanel.Size = new System.Drawing.Size(623, 409);
+			this.proj_tutorialListPanel.TabIndex = 5;
+			// 
 			// proj_NewButton
 			// 
 			this.proj_NewButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.proj_NewButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.proj_NewButton.Location = new System.Drawing.Point(671, 19);
+			this.proj_NewButton.Location = new System.Drawing.Point(726, 19);
 			this.proj_NewButton.Name = "proj_NewButton";
 			this.proj_NewButton.Size = new System.Drawing.Size(64, 23);
 			this.proj_NewButton.TabIndex = 2;
@@ -232,7 +223,7 @@ namespace LineWorldsLauncher
 			// 
 			this.proj_openButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.proj_openButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.proj_openButton.Location = new System.Drawing.Point(601, 19);
+			this.proj_openButton.Location = new System.Drawing.Point(656, 19);
 			this.proj_openButton.Name = "proj_openButton";
 			this.proj_openButton.Size = new System.Drawing.Size(64, 23);
 			this.proj_openButton.TabIndex = 0;
@@ -256,9 +247,9 @@ namespace LineWorldsLauncher
 			| System.Windows.Forms.AnchorStyles.Right)));
 			this.proj_projectListPanel.AutoScroll = true;
 			this.proj_projectListPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.proj_projectListPanel.Location = new System.Drawing.Point(131, 49);
+			this.proj_projectListPanel.Location = new System.Drawing.Point(167, 49);
 			this.proj_projectListPanel.Name = "proj_projectListPanel";
-			this.proj_projectListPanel.Size = new System.Drawing.Size(604, 364);
+			this.proj_projectListPanel.Size = new System.Drawing.Size(623, 409);
 			this.proj_projectListPanel.TabIndex = 3;
 			// 
 			// proj_editorListPanel
@@ -268,9 +259,9 @@ namespace LineWorldsLauncher
 			| System.Windows.Forms.AnchorStyles.Right)));
 			this.proj_editorListPanel.AutoScroll = true;
 			this.proj_editorListPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.proj_editorListPanel.Location = new System.Drawing.Point(131, 49);
+			this.proj_editorListPanel.Location = new System.Drawing.Point(167, 49);
 			this.proj_editorListPanel.Name = "proj_editorListPanel";
-			this.proj_editorListPanel.Size = new System.Drawing.Size(604, 364);
+			this.proj_editorListPanel.Size = new System.Drawing.Size(623, 409);
 			this.proj_editorListPanel.TabIndex = 5;
 			this.proj_editorListPanel.Resize += new System.EventHandler(this.Proj_editorListPanelResize);
 			// 
@@ -309,7 +300,7 @@ namespace LineWorldsLauncher
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-			this.ClientSize = new System.Drawing.Size(747, 437);
+			this.ClientSize = new System.Drawing.Size(802, 474);
 			this.Controls.Add(this.projectsPanel);
 			this.Controls.Add(this.welcomePanel);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
@@ -322,7 +313,6 @@ namespace LineWorldsLauncher
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormFormClosing);
 			this.welcomePanel.ResumeLayout(false);
 			this.projectsPanel.ResumeLayout(false);
-			this.TutorialPanel.ResumeLayout(false);
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.trayContextMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
