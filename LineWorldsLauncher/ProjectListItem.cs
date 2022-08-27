@@ -66,6 +66,7 @@ namespace LineWorldsLauncher
 						startInfo.FileName = editor.path;
 						startInfo.Arguments = "\"" + projectPath + "\"";
 						Process.Start(startInfo);
+						host.Hide();
 					}
 					else
 					{
@@ -84,6 +85,7 @@ namespace LineWorldsLauncher
 							startInfo.FileName = editor.path;
 							startInfo.Arguments = "\"" + projectPath + "\"";
 							Process.Start(startInfo);
+							host.Hide();
 						}
 					}
 					else

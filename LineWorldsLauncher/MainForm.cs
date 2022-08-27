@@ -102,6 +102,7 @@ namespace LineWorldsLauncher
 			MoveProjectTab(2);
 			proj_NewButton.Visible = false;
 			proj_openButton.Visible = false;
+			proj_titleLabel.Text = "Line Worlds Tutorials";
 		}
 		
 		void MainFormActivated(object sender, EventArgs e)
@@ -115,6 +116,7 @@ namespace LineWorldsLauncher
 			proj_NewButton.Text = "Install";
 			proj_NewButton.Visible = true;
 			proj_openButton.Visible = true;
+			proj_titleLabel.Text = "Line Worlds Editors";
 		}
 		
 		void Proj_projectsButtonClick(object sender, EventArgs e)
@@ -123,6 +125,7 @@ namespace LineWorldsLauncher
 			proj_NewButton.Text = "New";
 			proj_NewButton.Visible = true;
 			proj_openButton.Visible = true;
+			proj_titleLabel.Text = "Line Worlds Projects";
 		}
 		
 		void Proj_openButtonClick(object sender, EventArgs e)
@@ -268,6 +271,32 @@ namespace LineWorldsLauncher
 			{
 				var installDialog = new InstallForm(this);
 				installDialog.Show();
+			}
+		}
+		bool canExit;
+		void OpenToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			Show();
+		}
+		void ExitToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			canExit = true;
+			Dispose();
+			Application.Exit();
+		}
+		void MainFormFormClosing(object sender, FormClosingEventArgs e)
+		{
+			if(!canExit)
+			{
+				e.Cancel = true;
+				Hide();
+			}
+		}
+		void TrayIconMouseClick(object sender, MouseEventArgs e)
+		{
+			if(e.Button == MouseButtons.Left)
+			{
+				Show();
 			}
 		}
 	}

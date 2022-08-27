@@ -30,6 +30,10 @@ namespace LineWorldsLauncher
 		private System.Windows.Forms.FlowLayoutPanel proj_editorListPanel;
 		private System.Windows.Forms.Panel TutorialPanel;
 		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.NotifyIcon trayIcon;
+		private System.Windows.Forms.ContextMenuStrip trayContextMenu;
+		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -52,6 +56,7 @@ namespace LineWorldsLauncher
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.welc_goButton = new System.Windows.Forms.Button();
 			this.welc_titleLabel = new System.Windows.Forms.Label();
@@ -69,10 +74,15 @@ namespace LineWorldsLauncher
 			this.proj_titleLabel = new System.Windows.Forms.Label();
 			this.proj_projectListPanel = new System.Windows.Forms.FlowLayoutPanel();
 			this.proj_editorListPanel = new System.Windows.Forms.FlowLayoutPanel();
+			this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+			this.trayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.welcomePanel.SuspendLayout();
 			this.projectsPanel.SuspendLayout();
 			this.TutorialPanel.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
+			this.trayContextMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// welc_goButton
@@ -264,6 +274,36 @@ namespace LineWorldsLauncher
 			this.proj_editorListPanel.TabIndex = 5;
 			this.proj_editorListPanel.Resize += new System.EventHandler(this.Proj_editorListPanelResize);
 			// 
+			// trayIcon
+			// 
+			this.trayIcon.ContextMenuStrip = this.trayContextMenu;
+			this.trayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("trayIcon.Icon")));
+			this.trayIcon.Text = "Line Worlds Launcher";
+			this.trayIcon.Visible = true;
+			this.trayIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TrayIconMouseClick);
+			// 
+			// trayContextMenu
+			// 
+			this.trayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.openToolStripMenuItem,
+			this.exitToolStripMenuItem});
+			this.trayContextMenu.Name = "trayContextMenu";
+			this.trayContextMenu.Size = new System.Drawing.Size(104, 48);
+			// 
+			// openToolStripMenuItem
+			// 
+			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+			this.openToolStripMenuItem.Text = "Open";
+			this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItemClick);
+			// 
+			// exitToolStripMenuItem
+			// 
+			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+			this.exitToolStripMenuItem.Text = "Exit";
+			this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,10 +319,12 @@ namespace LineWorldsLauncher
 			this.Text = "Line Worlds Launcher";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.Activated += new System.EventHandler(this.MainFormActivated);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormFormClosing);
 			this.welcomePanel.ResumeLayout(false);
 			this.projectsPanel.ResumeLayout(false);
 			this.TutorialPanel.ResumeLayout(false);
 			this.flowLayoutPanel1.ResumeLayout(false);
+			this.trayContextMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
