@@ -1,5 +1,6 @@
 # Line Worlds Launcher
  The main launcher for Line Worlds!
+ Project created with SharpDevelop 5.1, opening it in Visual Studio will make SharpDevelop not being able to open the project
 
 ## Features
 - Download Editor from the launcher
