@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Reflection;
+using System.Security.Principal;
 using Newtonsoft.Json;
 
 namespace LineWorldsLauncher
@@ -14,7 +16,7 @@ namespace LineWorldsLauncher
 		public Panel[] panels;
 		public Panel[] projPanels;
 		public int projPanelIndex;
-		public const float version = 1.2f;
+		public const float version = 1.3f;
 		
 		public List<ProjectInstance> instances = new List<ProjectInstance>();
 		public List<EditorInstance> editorInstances = new List<EditorInstance>();
@@ -29,6 +31,11 @@ namespace LineWorldsLauncher
 		public MainForm()
 		{
 			InitializeComponent();
+	        if (!RunningAsAdmin())
+	        {
+	        	MessageBox.Show("Program is not running as admin, some stuff might break", "Launcher");
+	        }
+	        
 			ServicePointManager.Expect100Continue = true;
 			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 			panels = new []{
@@ -43,31 +50,38 @@ namespace LineWorldsLauncher
 			projPanelIndex = 0;
 			MoveProjectTab(projPanelIndex);
 			
-			if(File.Exists("preferences.json"))
+			try
 			{
-				preferences = JsonConvert.DeserializeObject<Preferences>(File.ReadAllText("preferences.json"));
-				foreach(var editor in preferences.editors)
+				if(File.Exists("preferences.json"))
 				{
-					if(File.Exists(editor.path))
+					preferences = JsonConvert.DeserializeObject<Preferences>(File.ReadAllText("preferences.json"));
+					foreach(var editor in preferences.editors)
 					{
-						ImportEditor(editor.path.Replace('/', '\\'));
+						if(File.Exists(editor.path))
+						{
+							ImportEditor(editor.path.Replace('/', '\\'));
+						}
 					}
+					foreach(var project in preferences.projects)
+					{
+						if(Directory.Exists(project.path))
+						{
+							ImportProject(project.path.Replace('/', '\\'));
+						}
+					}
+					MoveTab(1);
 				}
-				foreach(var project in preferences.projects)
+				else
 				{
-					if(Directory.Exists(project.path))
-					{
-						ImportProject(project.path.Replace('/', '\\'));
-					}
+					MoveTab(0);
 				}
-				MoveTab(1);
+				Load += (sender, e) => RefreshProjectList();
 			}
-			else
+			catch (Exception e)
 			{
-				MoveTab(0);
+				MessageBox.Show("Error: " + e.Message + e.StackTrace, "Launcher Error");
 			}
-			Load += (sender, e) => RefreshProjectList();
-			
+				
 			var client = new WebClient();
 			client.DownloadStringCompleted += (sender, e) => {
 				if(e.Error != null)
@@ -83,7 +97,7 @@ namespace LineWorldsLauncher
 						if(MessageBox.Show("There's a new version of the launcher, do you want to download it?", "Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
 						{
 							File.WriteAllText("UpdateInfo.json", data);
-							System.Diagnostics.Process.Start("LauncherUpdater.exe");
+							Process.Start("LauncherUpdater.exe");
 							canExit = true;
 							Dispose();
 							Application.Exit();
@@ -352,6 +366,14 @@ namespace LineWorldsLauncher
 				Show();
 			}
 		}
+		
+	    private static bool RunningAsAdmin() 
+	    {
+	        WindowsIdentity id = WindowsIdentity.GetCurrent();
+	        var principal = new WindowsPrincipal(id);
+	
+	        return principal.IsInRole(WindowsBuiltInRole.Administrator);
+	    }
 	}
 	
 	public class ProjectInstance

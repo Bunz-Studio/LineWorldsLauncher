@@ -28,7 +28,22 @@ namespace LineWorldsLauncher
 		
 		void OpenButtonClick(object sender, EventArgs e)
 		{
-			Process.Start(path);
+            var proc = new ProcessStartInfo();
+            proc.UseShellExecute = true;
+            proc.FileName = path;
+            proc.Verb = "runas";
+            try
+            {
+                Process.Start(proc);
+            }
+            catch (Exception ex)
+            {
+            	proc = new ProcessStartInfo();
+            	proc.UseShellExecute = true;
+            	proc.FileName = path;
+                Process.Start(proc);
+                MessageBox.Show("Line Worlds isn't started as administrator, some things might broke", "Warning");
+            }
 		}
 	}
 }
