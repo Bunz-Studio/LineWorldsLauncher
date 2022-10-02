@@ -11,7 +11,7 @@ namespace LineWorldsLauncher
 {
 	public partial class InstallForm : Form
 	{
-		public const string mainLink = "http://dancinglineworlds.000webhostapp.com";
+		public const string mainLink = "https://raw.githubusercontent.com/Bunz-Studio/LineWorldsLauncher/main/Server";
 		public List<ServerFile> selectedFiles = new List<ServerFile>();
 		public List<InstallQueue> queue = new List<InstallQueue>();
 		public string version;
@@ -26,7 +26,7 @@ namespace LineWorldsLauncher
 			{
 				using(var client = new WebClient())
 				{
-					var str = client.DownloadString(mainLink + "/download/versions.json");
+					var str = client.DownloadString(mainLink + "/versions.json");
 					var versions = JsonConvert.DeserializeObject<ServerVersions>(str);
 					foreach(var ver in versions.versions)
 					{

@@ -16,7 +16,7 @@ namespace LineWorldsLauncher
 		public Panel[] panels;
 		public Panel[] projPanels;
 		public int projPanelIndex;
-		public const float version = 1.4f;
+		public const float version = 1.6f;
 		
 		public List<ProjectInstance> instances = new List<ProjectInstance>();
 		public List<EditorInstance> editorInstances = new List<EditorInstance>();
@@ -105,7 +105,7 @@ namespace LineWorldsLauncher
 					}
 				}
 			};
-			client.DownloadStringAsync(new Uri(InstallForm.mainLink + "/download/launcher.json"));
+			client.DownloadStringAsync(new Uri(InstallForm.mainLink + "/launcher.json"));
 			
 			Load += (sender, e) => {
 				if(!string.IsNullOrWhiteSpace(Program.queueProject))
