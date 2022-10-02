@@ -1,0 +1,23 @@
+{
+  "version":"0.6",
+  "files":[
+    {
+      "name":"Line Worlds",
+      "directory":"",
+      "link":"https://cdn.discordapp.com/attachments/1012934788115611738/1012979045190869052/LineWorldsv0.6-1.zip",
+      "size":27077
+    },
+    {
+      "name":"SharpDevelop For LineWorlds",
+      "directory":"",
+      "link":"https://cdn.discordapp.com/attachments/1012934788115611738/1012935852764172318/SharpDevelopForLineWorldsv0.6.zip",
+      "size":15681
+    },
+    {
+      "name":"Built-in Levels",
+      "directory":"",
+      "link":"https://cdn.discordapp.com/attachments/1012934788115611738/1012935852403474492/LevelsForLineWorldsv0.6.zip",
+      "size":6207
+    }
+  ]
+}

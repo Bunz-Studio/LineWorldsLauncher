@@ -51,7 +51,7 @@ namespace LineWorldsLauncher
 			projectOwnerLabel.Text = projectInfo.authorName;
 		}
 		
-		void ProjectListItemClick(object sender, EventArgs e)
+		public void ProjectListItemClick(object sender, EventArgs e)
 		{
 			if(Directory.Exists(projectPath))
 			{
@@ -60,13 +60,23 @@ namespace LineWorldsLauncher
 					string projectVersion = projectInfo.gameVersion.Remove(0, 2);
 					Console.WriteLine(projectVersion);
 					var startInfo = new ProcessStartInfo();
+					Console.WriteLine(projectInfo);
 					var editor = host.preferences.editors.Find(val => val.name.Contains(projectVersion));
 					if(editor != null)
 					{
-						startInfo.FileName = editor.path;
-						startInfo.Arguments = "\"" + projectPath + "\"";
-						Process.Start(startInfo);
-						host.Hide();
+						if(File.Exists(editor.path))
+						{
+							startInfo.FileName = editor.path;
+							startInfo.Arguments = "\"" + projectPath + "\"";
+							Process.Start(startInfo);
+							host.Hide();
+						}
+						else
+						{
+							MessageBox.Show("(EDITOR MISSING) You don't have an editor version " + projectVersion + " to open this", "Project Opener");
+							host.preferences.editors.Remove(editor);
+							host.SavePreferences();
+						}
 					}
 					else
 					{

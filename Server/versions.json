@@ -1,0 +1,12 @@
+{
+  "versions":[
+    {
+      "version":"0.6",
+      "list":"http://dancinglineworlds.000webhostapp.com/download/0.6/informations.json"
+    },
+    {
+      "version":"0.7",
+      "list":"http://dancinglineworlds.000webhostapp.com/download/0.7/informations.json"
+    }
+  ]
+}

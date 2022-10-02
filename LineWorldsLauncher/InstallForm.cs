@@ -126,9 +126,9 @@ namespace LineWorldsLauncher
 			filesPanel.Visible = false;
 			InstallPanel.Visible = true;
 			
-			CheckDirectory("Editor");
-			CheckDirectory("Editor/" + version);
-			CheckDirectory("Cache");
+			CheckDirectory("Editor".CorrectPath());
+			CheckDirectory(("Editor/" + version).CorrectPath());
+			CheckDirectory("Cache".CorrectPath());
 			int i = 0;
 			int index = 0;
 			foreach(var sel in selectedFiles)
@@ -155,9 +155,9 @@ namespace LineWorldsLauncher
 					}
 					else
 					{
-						using(ZipFile zip = ZipFile.Read("Cache/" + sel.name + version))
+						using(ZipFile zip = ZipFile.Read(("Cache/" + sel.name + version).CorrectPath()))
 						{
-							zip.ExtractAll("Editor/" + version + "/");
+							zip.ExtractAll(("Editor/" + version + "/").CorrectPath());
 						}
 						item.ProgressLabel.Text = "Installed";
 					}
@@ -167,9 +167,9 @@ namespace LineWorldsLauncher
 					{
 						CancelButton.Text = "Finish";
 						finishInstall = true;
-						if(File.Exists("Editor/" + version + "/LineWorlds.exe"))
+						if(File.Exists(("Editor/" + version + "/LineWorlds.exe").CorrectPath()))
 						{
-							host.ImportEditor(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Editor/" + version + "/LineWorlds.exe"));
+							host.ImportEditor(("Editor/" + version + "/LineWorlds.exe").CorrectPath());
 						}
 					}
 					else
@@ -185,7 +185,7 @@ namespace LineWorldsLauncher
 		}
 		public void DownloadFile(int index)
 		{
-			queue[index].client.DownloadFileAsync(new Uri(queue[index].file.link), "Cache/" + queue[index].file.name + version);
+			queue[index].client.DownloadFileAsync(new Uri(queue[index].file.link), ("Cache/" + queue[index].file.name + version).CorrectPath());
 		}
 		
 		public void CheckDirectory(string path)

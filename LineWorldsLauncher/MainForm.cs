@@ -16,7 +16,7 @@ namespace LineWorldsLauncher
 		public Panel[] panels;
 		public Panel[] projPanels;
 		public int projPanelIndex;
-		public const float version = 1.3f;
+		public const float version = 1.4f;
 		
 		public List<ProjectInstance> instances = new List<ProjectInstance>();
 		public List<EditorInstance> editorInstances = new List<EditorInstance>();
@@ -25,7 +25,7 @@ namespace LineWorldsLauncher
 		
 		public void SavePreferences()
 		{
-			File.WriteAllText("preferences.json", JsonConvert.SerializeObject(preferences));
+			File.WriteAllText("preferences.json".CorrectPath(), JsonConvert.SerializeObject(preferences));
 		}
 		
 		public MainForm()
@@ -52,9 +52,9 @@ namespace LineWorldsLauncher
 			
 			try
 			{
-				if(File.Exists("preferences.json"))
+				if(File.Exists("preferences.json".CorrectPath()))
 				{
-					preferences = JsonConvert.DeserializeObject<Preferences>(File.ReadAllText("preferences.json"));
+					preferences = JsonConvert.DeserializeObject<Preferences>(File.ReadAllText("preferences.json".CorrectPath()));
 					foreach(var editor in preferences.editors)
 					{
 						if(File.Exists(editor.path))
@@ -96,8 +96,8 @@ namespace LineWorldsLauncher
 					{
 						if(MessageBox.Show("There's a new version of the launcher, do you want to download it?", "Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
 						{
-							File.WriteAllText("UpdateInfo.json", data);
-							Process.Start("LauncherUpdater.exe");
+							File.WriteAllText("UpdateInfo.json".CorrectPath(), data);
+							Process.Start("LauncherUpdater.exe".CorrectPath());
 							canExit = true;
 							Dispose();
 							Application.Exit();
@@ -106,6 +106,40 @@ namespace LineWorldsLauncher
 				}
 			};
 			client.DownloadStringAsync(new Uri(InstallForm.mainLink + "/download/launcher.json"));
+			
+			Load += (sender, e) => {
+				if(!string.IsNullOrWhiteSpace(Program.queueProject))
+				{
+					if(Path.GetExtension(Program.queueProject).Contains("liwb"))
+					{
+						if(preferences.editors.Count > 0)
+						{
+							var startInfo = new ProcessStartInfo();
+							preferences.editors.Sort((val1, val2) => 
+							                         float.Parse(val2.name.Replace("Line Worlds ", "")).CompareTo(
+							                         	float.Parse(val1.name.Replace("Line Worlds ", ""))
+							                         ));
+							var editor = preferences.editors[0];
+							if(editor != null)
+							{
+								startInfo.FileName = editor.path;
+								startInfo.Arguments = "-liwb \"" + Program.queueProject + "\"";
+								Process.Start(startInfo);
+								Hide();
+							}
+						}
+						else
+						{
+							MessageBox.Show("You don't have any editor to open this project", "Project Opener");
+						}
+					}
+					else
+					{
+						var item = ImportProject(Program.queueProject);
+						item.ProjectListItemClick(this, null);
+					}
+				}
+			};
 		}
 		
 		public void MoveTab(int index)
@@ -267,9 +301,10 @@ namespace LineWorldsLauncher
 			}
 		}
 		
-		public void ImportProject(string path)
+		public ProjectListItem ImportProject(string path)
 		{
-			if(!instances.Exists(val => val.directory.Replace('/', '\\') == path))
+			var sinst = instances.Find(val => val.directory.Replace('/', '\\') == path);
+			if(sinst == null)
 			{
 				var inst = new ProjectListItem(path);
 				proj_projectListPanel.Controls.Add(inst);
@@ -290,6 +325,11 @@ namespace LineWorldsLauncher
 				SavePreferences();
 				instances.Add(i);
 				RefreshProjectList();
+				return inst;
+			}
+			else
+			{
+				return sinst.listItem;
 			}
 		}
 		
@@ -367,13 +407,21 @@ namespace LineWorldsLauncher
 			}
 		}
 		
-	    private static bool RunningAsAdmin() 
+	    public static bool RunningAsAdmin() 
 	    {
 	        WindowsIdentity id = WindowsIdentity.GetCurrent();
 	        var principal = new WindowsPrincipal(id);
 	
 	        return principal.IsInRole(WindowsBuiltInRole.Administrator);
 	    }
+	}
+
+	public static class Utility
+	{
+		public static string CorrectPath(this string path)
+		{
+			return Path.Combine(MainForm.GoUpFolder(Assembly.GetEntryAssembly().Location), path);
+		}
 	}
 	
 	public class ProjectInstance
