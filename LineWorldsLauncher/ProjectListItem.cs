@@ -73,14 +73,39 @@ namespace LineWorldsLauncher
 						}
 						else
 						{
-							MessageBox.Show("(EDITOR MISSING) You don't have an editor version " + projectVersion + " to open this", "Project Opener");
 							host.preferences.editors.Remove(editor);
 							host.SavePreferences();
+							if(MessageBox.Show("(EDITOR MISSING) You don't have an editor version " + projectVersion + " to open this, do you want to open it with the latest version of the editor?", "Project Opener", MessageBoxButtons.YesNo) == DialogResult.Yes)
+							{
+								startInfo = new ProcessStartInfo();
+								if(host.preferences.editors.Count <= 0) return;
+								editor = host.preferences.editors[host.preferences.editors.Count - 1];
+								if(editor != null)
+								{
+									startInfo.FileName = editor.path;
+									startInfo.Arguments = "\"" + projectPath + "\"";
+									Process.Start(startInfo);
+									host.Hide();
+								}
+							}
 						}
 					}
 					else
 					{
-						MessageBox.Show("You don't have an editor version " + projectVersion + " to open this", "Project Opener");
+						
+						if(MessageBox.Show("You don't have an editor version " + projectVersion + " to open this, do you want to open it with the latest version of the editor?", "Project Opener", MessageBoxButtons.YesNo) == DialogResult.Yes)
+						{
+							startInfo = new ProcessStartInfo();
+							if(host.preferences.editors.Count <= 0) return;
+							editor = host.preferences.editors[host.preferences.editors.Count - 1];
+							if(editor != null)
+							{
+								startInfo.FileName = editor.path;
+								startInfo.Arguments = "\"" + projectPath + "\"";
+								Process.Start(startInfo);
+								host.Hide();
+							}
+						}
 					}
 				}
 				else
@@ -100,7 +125,19 @@ namespace LineWorldsLauncher
 					}
 					else
 					{
-						MessageBox.Show("You don't have any editor to open this project", "Project Opener");
+						if(MessageBox.Show("You don't have any editor to open this project, do you want to open it with the latest version of the editor?", "Project Opener", MessageBoxButtons.YesNo) == DialogResult.Yes)
+						{
+							var startInfo = new ProcessStartInfo();
+							if(host.preferences.editors.Count <= 0) return;
+							var editor = host.preferences.editors[host.preferences.editors.Count - 1];
+							if(editor != null)
+							{
+								startInfo.FileName = editor.path;
+								startInfo.Arguments = "\"" + projectPath + "\"";
+								Process.Start(startInfo);
+								host.Hide();
+							}
+						}
 					}
 				}
 			}
