@@ -1,0 +1,23 @@
+{
+  "version":"0.8",
+  "files":[
+    {
+      "name":"Line Worlds",
+      "directory":"",
+      "link":"https://github.com/Bunz-Studio/LineWorlds/releases/download/v0.8-beta/LineWorldsv0.8.zip",
+      "size":27903
+    },
+    {
+      "name":"SharpDevelop For LineWorlds",
+      "directory":"",
+      "link":"https://cdn.discordapp.com/attachments/1012934788115611738/1012935852764172318/SharpDevelopForLineWorldsv0.6.zip",
+      "size":15681
+    },
+    {
+      "name":"Built-in Levels",
+      "directory":"",
+      "link":"https://cdn.discordapp.com/attachments/1012934788115611738/1012935852403474492/LevelsForLineWorldsv0.6.zip",
+      "size":6207
+    }
+  ]
+}

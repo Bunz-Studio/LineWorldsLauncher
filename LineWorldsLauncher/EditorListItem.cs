@@ -10,11 +10,12 @@ namespace LineWorldsLauncher
 	public partial class EditorListItem : UserControl
 	{
 		public string path;
+		public string editorDir;
 		public EditorListItem(string editorPath)
 		{
 			InitializeComponent();
 			path = editorPath;
-			var editorDir = MainForm.GoUpFolder(editorPath);
+			editorDir = MainForm.GoUpFolder(editorPath);
 			var verPath = Path.Combine(editorDir, "LineWorlds_Data", "version");
 			var versionInfo = FileVersionInfo.GetVersionInfo(editorPath);
 			string version = versionInfo.FileVersion;
@@ -44,6 +45,14 @@ namespace LineWorldsLauncher
                 Process.Start(proc);
                 MessageBox.Show("Line Worlds isn't started as administrator, some things might broke", "Warning");
             }
+		}
+		
+		void OpenFolderClick(object sender, EventArgs e)
+		{
+			if(Directory.Exists(editorDir))
+			{
+				Process.Start(editorDir);
+			}
 		}
 	}
 }

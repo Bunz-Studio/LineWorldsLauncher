@@ -98,7 +98,7 @@ namespace LineWorldsLauncher
             }
             catch (Exception e)
             {
-            	MessageBox.Show("Failed to register file associaion for Line Worlds: " + e.Message);
+            	// MessageBox.Show("Failed to register file associaion for Line Worlds: " + e.Message);
             }
         }
         public static void CreateRegis()
@@ -115,7 +115,7 @@ namespace LineWorldsLauncher
             }
             catch (Exception e)
             {
-            	MessageBox.Show("Failed to register internet protocol for Line Worlds: " + e.Message);
+            	// MessageBox.Show("Failed to register internet protocol for Line Worlds: " + e.Message);
             }
         }
 	}

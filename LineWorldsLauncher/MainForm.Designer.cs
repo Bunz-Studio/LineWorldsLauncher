@@ -109,11 +109,15 @@ namespace LineWorldsLauncher
 			| System.Windows.Forms.AnchorStyles.Left) 
 			| System.Windows.Forms.AnchorStyles.Right)));
 			this.welc_descriptionLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+			this.welc_descriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
 			this.welc_descriptionLabel.Location = new System.Drawing.Point(16, 49);
+			this.welc_descriptionLabel.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
 			this.welc_descriptionLabel.Name = "welc_descriptionLabel";
+			this.welc_descriptionLabel.Padding = new System.Windows.Forms.Padding(9, 9, 9, 0);
 			this.welc_descriptionLabel.Size = new System.Drawing.Size(773, 374);
 			this.welc_descriptionLabel.TabIndex = 2;
 			this.welc_descriptionLabel.Text = resources.GetString("welc_descriptionLabel.Text");
+			this.welc_descriptionLabel.UseMnemonic = false;
 			// 
 			// welcomePanel
 			// 

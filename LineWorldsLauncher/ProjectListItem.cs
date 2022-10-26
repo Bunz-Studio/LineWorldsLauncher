@@ -105,5 +105,12 @@ namespace LineWorldsLauncher
 				}
 			}
 		}
+		void OpenFolderButtonClick(object sender, EventArgs e)
+		{
+			if(Directory.Exists(projectPath))
+			{
+				Process.Start(projectPath);
+			}
+		}
 	}
 }

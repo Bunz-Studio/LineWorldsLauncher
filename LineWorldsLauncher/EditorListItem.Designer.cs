@@ -18,6 +18,7 @@ namespace LineWorldsLauncher
 		public System.Windows.Forms.Label editorPathLabel;
 		public System.Windows.Forms.Button removeButton;
 		public System.Windows.Forms.Button openButton;
+		public System.Windows.Forms.Button openFolderButton;
 		
 		/// <summary>
 		/// Disposes resources used by the control.
@@ -44,6 +45,7 @@ namespace LineWorldsLauncher
 			this.editorPathLabel = new System.Windows.Forms.Label();
 			this.removeButton = new System.Windows.Forms.Button();
 			this.openButton = new System.Windows.Forms.Button();
+			this.openFolderButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// editorTitleLabel
@@ -90,11 +92,24 @@ namespace LineWorldsLauncher
 			this.openButton.UseVisualStyleBackColor = true;
 			this.openButton.Click += new System.EventHandler(this.OpenButtonClick);
 			// 
+			// openFolderButton
+			// 
+			this.openFolderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.openFolderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.openFolderButton.Location = new System.Drawing.Point(311, 9);
+			this.openFolderButton.Name = "openFolderButton";
+			this.openFolderButton.Size = new System.Drawing.Size(86, 23);
+			this.openFolderButton.TabIndex = 4;
+			this.openFolderButton.Text = "Open Folder";
+			this.openFolderButton.UseVisualStyleBackColor = true;
+			this.openFolderButton.Click += new System.EventHandler(this.OpenFolderClick);
+			// 
 			// EditorListItem
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+			this.Controls.Add(this.openFolderButton);
 			this.Controls.Add(this.openButton);
 			this.Controls.Add(this.removeButton);
 			this.Controls.Add(this.editorPathLabel);

@@ -17,6 +17,7 @@ namespace LineWorldsLauncher
 		public System.Windows.Forms.Label projectTitleLabel;
 		private System.Windows.Forms.Label projectPathLabel;
 		private System.Windows.Forms.Label projectOwnerLabel;
+		private System.Windows.Forms.Button openFolderButton;
 		
 		/// <summary>
 		/// Disposes resources used by the control.
@@ -42,6 +43,7 @@ namespace LineWorldsLauncher
 			this.projectTitleLabel = new System.Windows.Forms.Label();
 			this.projectPathLabel = new System.Windows.Forms.Label();
 			this.projectOwnerLabel = new System.Windows.Forms.Label();
+			this.openFolderButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// projectTitleLabel
@@ -77,11 +79,24 @@ namespace LineWorldsLauncher
 			this.projectOwnerLabel.Text = "ProjectOwner";
 			this.projectOwnerLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
+			// openFolderButton
+			// 
+			this.openFolderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.openFolderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.openFolderButton.Location = new System.Drawing.Point(437, 31);
+			this.openFolderButton.Name = "openFolderButton";
+			this.openFolderButton.Size = new System.Drawing.Size(81, 26);
+			this.openFolderButton.TabIndex = 3;
+			this.openFolderButton.Text = "Open Folder";
+			this.openFolderButton.UseVisualStyleBackColor = true;
+			this.openFolderButton.Click += new System.EventHandler(this.OpenFolderButtonClick);
+			// 
 			// ProjectListItem
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+			this.Controls.Add(this.openFolderButton);
 			this.Controls.Add(this.projectOwnerLabel);
 			this.Controls.Add(this.projectPathLabel);
 			this.Controls.Add(this.projectTitleLabel);
