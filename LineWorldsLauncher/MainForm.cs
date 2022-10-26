@@ -16,7 +16,7 @@ namespace LineWorldsLauncher
 		public Panel[] panels;
 		public Panel[] projPanels;
 		public int projPanelIndex;
-		public const float version = 1.71f;
+		public const float version = 1.8f;
 		
 		public List<ProjectInstance> instances = new List<ProjectInstance>();
 		public List<EditorInstance> editorInstances = new List<EditorInstance>();
