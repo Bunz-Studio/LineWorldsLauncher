@@ -33,6 +33,10 @@ namespace LineWorldsLauncher
 		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.FlowLayoutPanel proj_tutorialListPanel;
+		private System.Windows.Forms.Button proj_settingsButton;
+		private System.Windows.Forms.FlowLayoutPanel proj_settingsPanel;
+		private System.Windows.Forms.Panel settings_useLatestEditorPanel;
+		private System.Windows.Forms.Label settings_useLatestEditorLabel;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -76,10 +80,16 @@ namespace LineWorldsLauncher
 			this.trayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.proj_settingsButton = new System.Windows.Forms.Button();
+			this.proj_settingsPanel = new System.Windows.Forms.FlowLayoutPanel();
+			this.settings_useLatestEditorPanel = new System.Windows.Forms.Panel();
+			this.settings_useLatestEditorLabel = new System.Windows.Forms.Label();
 			this.welcomePanel.SuspendLayout();
 			this.projectsPanel.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.trayContextMenu.SuspendLayout();
+			this.proj_settingsPanel.SuspendLayout();
+			this.settings_useLatestEditorPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// welc_goButton
@@ -138,12 +148,13 @@ namespace LineWorldsLauncher
 			| System.Windows.Forms.AnchorStyles.Left) 
 			| System.Windows.Forms.AnchorStyles.Right)));
 			this.projectsPanel.Controls.Add(this.flowLayoutPanel1);
-			this.projectsPanel.Controls.Add(this.proj_tutorialListPanel);
 			this.projectsPanel.Controls.Add(this.proj_NewButton);
 			this.projectsPanel.Controls.Add(this.proj_openButton);
+			this.projectsPanel.Controls.Add(this.proj_settingsPanel);
 			this.projectsPanel.Controls.Add(this.proj_titleLabel);
 			this.projectsPanel.Controls.Add(this.proj_projectListPanel);
 			this.projectsPanel.Controls.Add(this.proj_editorListPanel);
+			this.projectsPanel.Controls.Add(this.proj_tutorialListPanel);
 			this.projectsPanel.Location = new System.Drawing.Point(0, 0);
 			this.projectsPanel.Name = "projectsPanel";
 			this.projectsPanel.Size = new System.Drawing.Size(803, 475);
@@ -157,6 +168,7 @@ namespace LineWorldsLauncher
 			this.flowLayoutPanel1.Controls.Add(this.proj_projectsButton);
 			this.flowLayoutPanel1.Controls.Add(this.proj_editorsButton);
 			this.flowLayoutPanel1.Controls.Add(this.proj_tutorialsButton);
+			this.flowLayoutPanel1.Controls.Add(this.proj_settingsButton);
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(16, 49);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.Size = new System.Drawing.Size(145, 409);
@@ -299,6 +311,46 @@ namespace LineWorldsLauncher
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
 			// 
+			// proj_settingsButton
+			// 
+			this.proj_settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.proj_settingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+			this.proj_settingsButton.Location = new System.Drawing.Point(3, 129);
+			this.proj_settingsButton.Name = "proj_settingsButton";
+			this.proj_settingsButton.Size = new System.Drawing.Size(137, 36);
+			this.proj_settingsButton.TabIndex = 3;
+			this.proj_settingsButton.Text = "Settings";
+			this.proj_settingsButton.UseVisualStyleBackColor = true;
+			// 
+			// proj_settingsPanel
+			// 
+			this.proj_settingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
+			this.proj_settingsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.proj_settingsPanel.Controls.Add(this.settings_useLatestEditorPanel);
+			this.proj_settingsPanel.Location = new System.Drawing.Point(167, 49);
+			this.proj_settingsPanel.Name = "proj_settingsPanel";
+			this.proj_settingsPanel.Size = new System.Drawing.Size(623, 409);
+			this.proj_settingsPanel.TabIndex = 6;
+			// 
+			// settings_useLatestEditorPanel
+			// 
+			this.settings_useLatestEditorPanel.Controls.Add(this.settings_useLatestEditorLabel);
+			this.settings_useLatestEditorPanel.Location = new System.Drawing.Point(3, 3);
+			this.settings_useLatestEditorPanel.Name = "settings_useLatestEditorPanel";
+			this.settings_useLatestEditorPanel.Size = new System.Drawing.Size(618, 36);
+			this.settings_useLatestEditorPanel.TabIndex = 0;
+			// 
+			// settings_useLatestEditorLabel
+			// 
+			this.settings_useLatestEditorLabel.Location = new System.Drawing.Point(5, 6);
+			this.settings_useLatestEditorLabel.Name = "settings_useLatestEditorLabel";
+			this.settings_useLatestEditorLabel.Size = new System.Drawing.Size(155, 23);
+			this.settings_useLatestEditorLabel.TabIndex = 0;
+			this.settings_useLatestEditorLabel.Text = "Use the Latest Editor";
+			this.settings_useLatestEditorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -319,6 +371,8 @@ namespace LineWorldsLauncher
 			this.projectsPanel.ResumeLayout(false);
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.trayContextMenu.ResumeLayout(false);
+			this.proj_settingsPanel.ResumeLayout(false);
+			this.settings_useLatestEditorPanel.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
