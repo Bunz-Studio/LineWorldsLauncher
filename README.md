@@ -4,6 +4,7 @@
  [![Total Download Count](https://img.shields.io/github/downloads/Bunz-Studio/LineWorldsLauncher/total)](https://github.com/Bunz-Studio/LineWorldsLauncher/releases)
  ![Star Count](https://img.shields.io/github/stars/Bunz-Studio/LineWorldsLauncher?style=social)
  ![Fork Count](https://img.shields.io/github/forks/Bunz-Studio/LineWorldsLauncher?style=social)
+ 
  The main launcher for Line Worlds!
  Project created with SharpDevelop 5.1, opening it in Visual Studio will make SharpDevelop not being able to open the project
 
