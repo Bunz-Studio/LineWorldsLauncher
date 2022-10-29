@@ -15,7 +15,8 @@
 - Keep updated with tutorials
 
 ## Maintainer
-- Bunzhida (ReDark Technology)
+- [Bunzhida (ReDark Technology)](https://github.com/Bunzhida)
+- [Team Sillicate](https://www.youtube.com/channel/UCRzuzMP0SD01Kd606oROvmA)
 
 ## Known bugs/TODO List
 - Arphros version info isn't considered a valid/openable project
