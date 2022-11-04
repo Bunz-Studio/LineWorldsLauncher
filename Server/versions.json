@@ -11,6 +11,10 @@
     {
       "version":"0.8",
       "list":"https://raw.githubusercontent.com/Bunz-Studio/LineWorldsLauncher/main/Server/0.8/informations.json"
+    },
+    {
+      "version":"0.81",
+      "list":"https://raw.githubusercontent.com/Bunz-Studio/LineWorldsLauncher/main/Server/0.8/informations.json"
     }
   ]
 }
